@@ -6,28 +6,44 @@ import (
 )
 
 type Message struct {
-	Sid         string `json:"sid"`
-	DateCreated string `json:"date_created"`
-	DateUpdated string `json:"date_updated"`
-	DateSent    string `json:"date_sent"`
-	AccountSid  string `json:"account_sid"`
-	From        string `json:"from"`
-	To          string `json:"to"`
-	Body        string `json:"body"`
-	NumSegments string `json:"num_segments"`
-	Status      string `json:"status"`
-	Direction   string `json:"direction"`
-	Price       string `json:"price"`
-	PriceUnit   string `json:"price_unit"`
-	ApiVersion  string `json:"api_version"`
-	Uri         string `json:"uri"`
+	Sid                 string `json:"sid"`
+	DateCreated         string `json:"date_created"`
+	DateUpdated         string `json:"date_updated"`
+	DateSent            string `json:"date_sent"`
+	AccountSid          string `json:"account_sid"`
+	From                string `json:"from"`
+	MessagingServiceSid string `json:"messaging_service_sid"`
+	To                  string `json:"to"`
+	Body                string `json:"body"`
+	NumSegments         string `json:"num_segments"`
+	Status              string `json:"status"`
+	Direction           string `json:"direction"`
+	Price               string `json:"price"`
+	PriceUnit           string `json:"price_unit"`
+	ApiVersion          string `json:"api_version"`
+	Uri                 string `json:"uri"`
 }
 
 func NewMessage(client Client, from string, to string, content ...Optional) (*Message, error) {
+	return sendMessage(client, from, "", to, content...)
+}
+
+func NewMessageFromService(client Client, fromServiceSid string, to string, content ...Optional) (*Message, error) {
+	return sendMessage(client, "", fromServiceSid, to, content...)
+}
+
+func sendMessage(client Client, fromNumber, fromMessagingServiceSid, to string, content ...Optional) (*Message, error) {
 	var message *Message
 
 	params := url.Values{}
-	params.Set("From", from)
+	if fromNumber != "" {
+		params.Set("From", fromNumber)
+	} else if fromMessagingServiceSid != "" {
+		params.Set("MessagingServiceSid", fromMessagingServiceSid)
+	} else {
+		return nil, Error{"Either From phone number or MessageServiceSid must be provided."}
+	}
+
 	params.Set("To", to)
 
 	for _, optional := range content {
