@@ -10,17 +10,17 @@ import (
 
 // IPService is a IP Messaging Service resource.
 type IPService struct {
-	Sid                    string            `json:"sid"`
-	AccountSid             string            `json:"account_sid"`
-	FriendlyName           string            `json:"friendly_name"`
-	DateCreated            string            `json:"date_created"`
-	DateUpdated            string            `json:"date_updated"`
-	DefaultServiceRoleSid  string            `json:"default_service_role_sid"`
-	DefaultChannelRoleSid  string            `json:"default_channel_role_sid"`
-	TypingIndicatorTimeout uint              `json:"typing_indicator_timeout"`
-	Webhooks               map[string]string `json:"webhooks"`
-	URL                    string            `json:"url"`
-	Links                  map[string]string `json:"links"`
+	Sid                    string                 `json:"sid"`
+	AccountSid             string                 `json:"account_sid"`
+	FriendlyName           string                 `json:"friendly_name"`
+	DateCreated            string                 `json:"date_created"`
+	DateUpdated            string                 `json:"date_updated"`
+	DefaultServiceRoleSid  string                 `json:"default_service_role_sid"`
+	DefaultChannelRoleSid  string                 `json:"default_channel_role_sid"`
+	TypingIndicatorTimeout uint                   `json:"typing_indicator_timeout"`
+	Webhooks               map[string]interface{} `json:"webhooks"`
+	URL                    string                 `json:"url"`
+	Links                  map[string]string      `json:"links"`
 }
 
 // Meta is a metadata type for the IP messaging services.
@@ -57,6 +57,18 @@ const (
 	WebhookOnChannelDestroy = "Webhooks.OnChannelDestroy"
 	WebhookOnMemberAdd      = "Webhooks.OnMemberAdd"
 	WebhookOnMemberRemove   = "Webhooks.OnMemberRemove"
+)
+
+// Webkook event types
+const (
+	EventTypeOnMessageSend    = "onMessageSend"
+	EventTypeOnMessageRemove  = "onMessageRemove"
+	EventTypeOnMessageUpdate  = "onMessageUpdate"
+	EventTypeOnChannelAdd     = "onChannelAdd"
+	EventTypeOnChannelUpdate  = "onChannelUpdate"
+	EventTypeOnChannelDestroy = "onChannelDestroy"
+	EventTypeOnMemberAdd      = "onMemberAdd"
+	EventTypeOnMemberRemove   = "onMemberRemove"
 )
 
 // Webhooks are used to define push webhooks for an IP service.
