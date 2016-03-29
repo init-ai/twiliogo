@@ -142,7 +142,7 @@ func (c *IPChannelList) GetAllChannels() ([]IPChannel, error) {
 
 // HasNextPage returns whether or not there is a next page of channels.
 func (c *IPChannelList) HasNextPage() bool {
-	return c.Meta.NextPageUri != ""
+	return c.Meta.NextPageUrl != ""
 }
 
 // NextPage returns the next page of channels.
@@ -151,12 +151,12 @@ func (c *IPChannelList) NextPage() (*IPChannelList, error) {
 		return nil, Error{"No next page"}
 	}
 
-	return c.getPage(c.Meta.NextPageUri)
+	return c.getPage(c.Meta.NextPageUrl)
 }
 
 // HasPreviousPage indicates whether or not there is a previous page of results.
 func (c *IPChannelList) HasPreviousPage() bool {
-	return c.Meta.PreviousPageUri != ""
+	return c.Meta.PreviousPageUrl != ""
 }
 
 // PreviousPage returns the previous page of channels.
@@ -165,17 +165,12 @@ func (c *IPChannelList) PreviousPage() (*IPChannelList, error) {
 		return nil, Error{"No previous page"}
 	}
 
-	return c.getPage(c.Meta.NextPageUri)
+	return c.getPage(c.Meta.NextPageUrl)
 }
 
 // FirstPage returns the first page of channels.
 func (c *IPChannelList) FirstPage() (*IPChannelList, error) {
-	return c.getPage(c.Meta.FirstPageUri)
-}
-
-// LastPage returns the last page of channels.
-func (c *IPChannelList) LastPage() (*IPChannelList, error) {
-	return c.getPage(c.Meta.LastPageUri)
+	return c.getPage(c.Meta.FirstPageUrl)
 }
 
 func (c *IPChannelList) getPage(uri string) (*IPChannelList, error) {

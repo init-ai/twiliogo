@@ -109,7 +109,7 @@ func (c *IPMemberList) GetAllMembers() ([]IPMember, error) {
 
 // HasNextPage returns whether or not there is a next page of members.
 func (c *IPMemberList) HasNextPage() bool {
-	return c.Meta.NextPageUri != ""
+	return c.Meta.NextPageUrl != ""
 }
 
 // NextPage returns the next page of members.
@@ -118,12 +118,12 @@ func (c *IPMemberList) NextPage() (*IPMemberList, error) {
 		return nil, Error{"No next page"}
 	}
 
-	return c.getPage(c.Meta.NextPageUri)
+	return c.getPage(c.Meta.NextPageUrl)
 }
 
 // HasPreviousPage indicates whether or not there is a previous page of results.
 func (c *IPMemberList) HasPreviousPage() bool {
-	return c.Meta.PreviousPageUri != ""
+	return c.Meta.PreviousPageUrl != ""
 }
 
 // PreviousPage returns the previous page of members.
@@ -132,17 +132,12 @@ func (c *IPMemberList) PreviousPage() (*IPMemberList, error) {
 		return nil, Error{"No previous page"}
 	}
 
-	return c.getPage(c.Meta.NextPageUri)
+	return c.getPage(c.Meta.NextPageUrl)
 }
 
 // FirstPage returns the first page of members.
 func (c *IPMemberList) FirstPage() (*IPMemberList, error) {
-	return c.getPage(c.Meta.FirstPageUri)
-}
-
-// LastPage returns the last page of members.
-func (c *IPMemberList) LastPage() (*IPMemberList, error) {
-	return c.getPage(c.Meta.LastPageUri)
+	return c.getPage(c.Meta.FirstPageUrl)
 }
 
 func (c *IPMemberList) getPage(uri string) (*IPMemberList, error) {

@@ -25,17 +25,12 @@ type IPService struct {
 
 // Meta is a metadata type for the IP messaging services.
 type Meta struct {
-	Start           int    `json:"start"`
-	Total           int    `json:"total"`
-	NumPages        int    `json:"num_pages"`
 	Page            int    `json:"page"`
 	PageSize        int    `json:"page_size"`
-	End             int    `json:"end"`
-	Uri             string `json:"uri"`
-	FirstPageUri    string `json:"first_page_uri"`
-	LastPageUri     string `json:"last_page_uri"`
-	NextPageUri     string `json:"next_page_uri"`
-	PreviousPageUri string `json:"previous_page_uri"`
+	FirstPageUrl    string `json:"first_page_url"`
+	PreviousPageUrl string `json:"previous_page_url"`
+	Url             string `json:"url"`
+	NextPageUrl     string `json:"next_page_url"`
 	Key             string `json:"key"`
 }
 
@@ -223,7 +218,7 @@ func (s *IPServiceList) GetAllServices() ([]IPService, error) {
 
 // HasNextPage returns whether or not there is a next page of services.
 func (s *IPServiceList) HasNextPage() bool {
-	return s.Meta.NextPageUri != ""
+	return s.Meta.NextPageUrl != ""
 }
 
 // NextPage returns the next page of services.
@@ -232,12 +227,12 @@ func (s *IPServiceList) NextPage() (*IPServiceList, error) {
 		return nil, Error{"No next page"}
 	}
 
-	return s.getPage(s.Meta.NextPageUri)
+	return s.getPage(s.Meta.NextPageUrl)
 }
 
 // HasPreviousPage indicates whether or not there is a previous page of results.
 func (s *IPServiceList) HasPreviousPage() bool {
-	return s.Meta.PreviousPageUri != ""
+	return s.Meta.PreviousPageUrl != ""
 }
 
 // PreviousPage returns the previous page of services.
@@ -246,17 +241,12 @@ func (s *IPServiceList) PreviousPage() (*IPServiceList, error) {
 		return nil, Error{"No previous page"}
 	}
 
-	return s.getPage(s.Meta.NextPageUri)
+	return s.getPage(s.Meta.NextPageUrl)
 }
 
 // FirstPage returns the first page of services.
 func (s *IPServiceList) FirstPage() (*IPServiceList, error) {
-	return s.getPage(s.Meta.FirstPageUri)
-}
-
-// LastPage returns the last page of services.
-func (s *IPServiceList) LastPage() (*IPServiceList, error) {
-	return s.getPage(s.Meta.LastPageUri)
+	return s.getPage(s.Meta.FirstPageUrl)
 }
 
 func (s *IPServiceList) getPage(uri string) (*IPServiceList, error) {

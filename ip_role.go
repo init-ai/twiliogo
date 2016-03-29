@@ -157,7 +157,7 @@ func (s *IPRoleList) GetAllRoles() ([]IPRole, error) {
 
 // HasNextPage returns whether or not there is a next page of roles.
 func (s *IPRoleList) HasNextPage() bool {
-	return s.Meta.NextPageUri != ""
+	return s.Meta.NextPageUrl != ""
 }
 
 // NextPage returns the next page of roles.
@@ -166,12 +166,12 @@ func (s *IPRoleList) NextPage() (*IPRoleList, error) {
 		return nil, Error{"No next page"}
 	}
 
-	return s.getPage(s.Meta.NextPageUri)
+	return s.getPage(s.Meta.NextPageUrl)
 }
 
 // HasPreviousPage indicates whether or not there is a previous page of results.
 func (s *IPRoleList) HasPreviousPage() bool {
-	return s.Meta.PreviousPageUri != ""
+	return s.Meta.PreviousPageUrl != ""
 }
 
 // PreviousPage returns the previous page of roles.
@@ -180,17 +180,12 @@ func (s *IPRoleList) PreviousPage() (*IPRoleList, error) {
 		return nil, Error{"No previous page"}
 	}
 
-	return s.getPage(s.Meta.NextPageUri)
+	return s.getPage(s.Meta.NextPageUrl)
 }
 
 // FirstPage returns the first page of roles.
 func (s *IPRoleList) FirstPage() (*IPRoleList, error) {
-	return s.getPage(s.Meta.FirstPageUri)
-}
-
-// LastPage returns the last page of roles.
-func (s *IPRoleList) LastPage() (*IPRoleList, error) {
-	return s.getPage(s.Meta.LastPageUri)
+	return s.getPage(s.Meta.FirstPageUrl)
 }
 
 func (s *IPRoleList) getPage(uri string) (*IPRoleList, error) {

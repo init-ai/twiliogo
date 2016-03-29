@@ -126,7 +126,7 @@ func (s *IPUserList) GetAllUsers() ([]IPUser, error) {
 
 // HasNextPage returns whether or not there is a next page of users.
 func (s *IPUserList) HasNextPage() bool {
-	return s.Meta.NextPageUri != ""
+	return s.Meta.NextPageUrl != ""
 }
 
 // NextPage returns the next page of users.
@@ -135,12 +135,12 @@ func (s *IPUserList) NextPage() (*IPUserList, error) {
 		return nil, Error{"No next page"}
 	}
 
-	return s.getPage(s.Meta.NextPageUri)
+	return s.getPage(s.Meta.NextPageUrl)
 }
 
 // HasPreviousPage indicates whether or not there is a previous page of results.
 func (s *IPUserList) HasPreviousPage() bool {
-	return s.Meta.PreviousPageUri != ""
+	return s.Meta.PreviousPageUrl != ""
 }
 
 // PreviousPage returns the previous page of users.
@@ -149,17 +149,12 @@ func (s *IPUserList) PreviousPage() (*IPUserList, error) {
 		return nil, Error{"No previous page"}
 	}
 
-	return s.getPage(s.Meta.NextPageUri)
+	return s.getPage(s.Meta.NextPageUrl)
 }
 
 // FirstPage returns the first page of users.
 func (s *IPUserList) FirstPage() (*IPUserList, error) {
-	return s.getPage(s.Meta.FirstPageUri)
-}
-
-// LastPage returns the last page of users.
-func (s *IPUserList) LastPage() (*IPUserList, error) {
-	return s.getPage(s.Meta.LastPageUri)
+	return s.getPage(s.Meta.FirstPageUrl)
 }
 
 func (s *IPUserList) getPage(uri string) (*IPUserList, error) {
