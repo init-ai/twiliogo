@@ -54,7 +54,19 @@ const (
 	WebhookOnMemberRemove   = "Webhooks.OnMemberRemove"
 )
 
-// Webkook event types
+// Post-event webhooks available for services to specify
+const (
+	PostWebhookOnMessageSent      = "Webhooks.OnMessageSent"
+	PostWebhookOnMessageRemoved   = "Webhooks.OnMessageRemoved"
+	PostWebhookOnMessageUpdated   = "Webhooks.OnMessageUpdated"
+	PostWebhookOnChannelAdded     = "Webhooks.OnChannelAdded"
+	PostWebhookOnChannelUpdated   = "Webhooks.OnChannelUpdated"
+	PostWebhookOnChannelDestroyed = "Webhooks.OnChannelDestroyed"
+	PostWebhookOnMemberAdded      = "Webhooks.OnMemberAdded"
+	PostWebhookOnMemberRemoved    = "Webhooks.OnMemberRemoved"
+)
+
+// Webkook pre-event types
 const (
 	EventTypeOnMessageSend    = "onMessageSend"
 	EventTypeOnMessageRemove  = "onMessageRemove"
@@ -64,6 +76,18 @@ const (
 	EventTypeOnChannelDestroy = "onChannelDestroy"
 	EventTypeOnMemberAdd      = "onMemberAdd"
 	EventTypeOnMemberRemove   = "onMemberRemove"
+)
+
+// Webkook post-event types
+const (
+	PostEventTypeOnMessageSent      = "onMessageSent"
+	PostEventTypeOnMessageRemoved   = "onMessageRemoved"
+	PostEventTypeOnMessageUpdated   = "onMessageUpdate"
+	PostEventTypeOnChannelAdded     = "onChannelAdded"
+	PostEventTypeOnChannelUpdated   = "onChannelUpdated"
+	PostEventTypeOnChannelDestroyed = "onChannelDestroyed"
+	PostEventTypeOnMemberAdded      = "onMemberAdded"
+	PostEventTypeOnMemberRemoved    = "onMemberRemoved"
 )
 
 // Webhooks are used to define push webhooks for an IP service.
