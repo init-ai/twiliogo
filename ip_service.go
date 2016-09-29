@@ -137,7 +137,7 @@ func NewIPService(client *TwilioIPMessagingClient, friendlyName string, defaultS
 		}
 	}
 
-	res, err := client.post(params, "/Services.json")
+	res, err := client.post(params, "/Services")
 
 	if err != nil {
 		return service, err
@@ -153,7 +153,7 @@ func NewIPService(client *TwilioIPMessagingClient, friendlyName string, defaultS
 func GetIPService(client *TwilioIPMessagingClient, sid string) (*IPService, error) {
 	var service *IPService
 
-	res, err := client.get(url.Values{}, "/Services/"+sid+".json")
+	res, err := client.get(url.Values{}, "/Services/"+sid)
 
 	if err != nil {
 		return nil, err
@@ -190,7 +190,7 @@ func UpdateIPService(client *TwilioIPMessagingClient, sid string, friendlyName s
 		params.Set(k, v)
 	}
 
-	res, err := client.post(params, "/Services/"+sid+".json")
+	res, err := client.post(params, "/Services/"+sid)
 
 	if err != nil {
 		return service, err
@@ -206,7 +206,7 @@ func UpdateIPService(client *TwilioIPMessagingClient, sid string, friendlyName s
 func ListIPServices(client *TwilioIPMessagingClient) (*IPServiceList, error) {
 	var serviceList *IPServiceList
 
-	body, err := client.get(nil, "/Services.json")
+	body, err := client.get(nil, "/Services")
 
 	if err != nil {
 		return serviceList, err
