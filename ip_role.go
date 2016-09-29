@@ -59,7 +59,7 @@ func NewIPRole(client *TwilioIPMessagingClient, serviceSid string, friendlyName 
 		}
 	}
 
-	res, err := client.post(params, "/Services/"+serviceSid+"/Roles.json")
+	res, err := client.post(params, "/Services/"+serviceSid+"/Roles")
 
 	if err != nil {
 		return role, err
@@ -75,7 +75,7 @@ func NewIPRole(client *TwilioIPMessagingClient, serviceSid string, friendlyName 
 func GetIPRole(client *TwilioIPMessagingClient, serviceSid, sid string) (*IPRole, error) {
 	var role *IPRole
 
-	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Roles/"+sid+".json")
+	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Roles/"+sid)
 
 	if err != nil {
 		return nil, err
@@ -105,7 +105,7 @@ func UpdateIPRole(client *TwilioIPMessagingClient, serviceSid string, sid string
 		}
 	}
 
-	res, err := client.post(params, "/Services/"+serviceSid+"/Roles/"+sid+".json")
+	res, err := client.post(params, "/Services/"+serviceSid+"/Roles/"+sid)
 
 	if err != nil {
 		return role, err
@@ -121,7 +121,7 @@ func UpdateIPRole(client *TwilioIPMessagingClient, serviceSid string, sid string
 func ListIPRoles(client *TwilioIPMessagingClient, serviceSid string) (*IPRoleList, error) {
 	var roleList *IPRoleList
 
-	body, err := client.get(nil, "/Services/"+serviceSid+"/Roles.json")
+	body, err := client.get(nil, "/Services/"+serviceSid+"/Roles")
 
 	if err != nil {
 		return roleList, err
