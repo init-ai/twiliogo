@@ -43,7 +43,7 @@ func NewIPChannel(client *TwilioIPMessagingClient, serviceSid string, friendlyNa
 	params.Set("Type", kind)
 	params.Set("Attributes", attributes)
 
-	res, err := client.post(params, "/Services/"+serviceSid+"/Channels.json")
+	res, err := client.post(params, "/Services/"+serviceSid+"/Channels")
 
 	if err != nil {
 		return channel, err
@@ -69,7 +69,7 @@ func UpdateIPChannel(client *TwilioIPMessagingClient, serviceSid string, sid str
 	params.Set("Type", kind)
 	params.Set("Attributes", attributes)
 
-	res, err := client.post(params, "/Services/"+serviceSid+"/Channels/"+sid+".json")
+	res, err := client.post(params, "/Services/"+serviceSid+"/Channels/"+sid)
 
 	if err != nil {
 		return channel, err
@@ -85,7 +85,7 @@ func UpdateIPChannel(client *TwilioIPMessagingClient, serviceSid string, sid str
 func GetIPChannel(client *TwilioIPMessagingClient, serviceSid string, sid string) (*IPChannel, error) {
 	var channel *IPChannel
 
-	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Channels/"+sid+".json")
+	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Channels/"+sid)
 
 	if err != nil {
 		return nil, err
@@ -106,7 +106,7 @@ func DeleteIPChannel(client *TwilioIPMessagingClient, serviceSid, sid string) er
 func ListIPChannels(client *TwilioIPMessagingClient, serviceSid string) (*IPChannelList, error) {
 	var channelList *IPChannelList
 
-	body, err := client.get(nil, "/Services/"+serviceSid+"/Channels.json")
+	body, err := client.get(nil, "/Services/"+serviceSid+"/Channels")
 
 	if err != nil {
 		return channelList, err

@@ -47,7 +47,7 @@ func NewIPCredential(client *TwilioIPMessagingClient, friendlyName string, kind 
 		params.Set("ApiKey", gcmApiKey)
 	}
 
-	res, err := client.post(params, "/Credentials.json")
+	res, err := client.post(params, "/Credentials")
 
 	if err != nil {
 		return credential, err
@@ -63,7 +63,7 @@ func NewIPCredential(client *TwilioIPMessagingClient, friendlyName string, kind 
 func GetIPCredential(client *TwilioIPMessagingClient, sid string) (*IPCredential, error) {
 	var credential *IPCredential
 
-	res, err := client.get(url.Values{}, "/Credentials/"+sid+".json")
+	res, err := client.get(url.Values{}, "/Credentials/"+sid)
 
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ func UpdateIPCredential(client *TwilioIPMessagingClient, sid string, friendlyNam
 		params.Set("Sandbox", "false")
 	}
 
-	res, err := client.post(params, "/Credentials/"+sid+".json")
+	res, err := client.post(params, "/Credentials/"+sid)
 
 	if err != nil {
 		return credential, err
@@ -109,7 +109,7 @@ func UpdateIPCredential(client *TwilioIPMessagingClient, sid string, friendlyNam
 func ListIPCredentials(client *TwilioIPMessagingClient) (*IPCredentialList, error) {
 	var credentialList *IPCredentialList
 
-	body, err := client.get(nil, "/Credentials.json")
+	body, err := client.get(nil, "/Credentials")
 
 	if err != nil {
 		return credentialList, err

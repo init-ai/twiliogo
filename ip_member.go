@@ -36,7 +36,7 @@ func AddIPMemberToChannel(client *TwilioIPMessagingClient, serviceSid string, ch
 		params.Set("RoleSid", roleSid)
 	}
 
-	res, err := client.post(params, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Members.json")
+	res, err := client.post(params, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Members")
 
 	if err != nil {
 		return member, err
@@ -52,7 +52,7 @@ func AddIPMemberToChannel(client *TwilioIPMessagingClient, serviceSid string, ch
 func GetIPChannelMember(client *TwilioIPMessagingClient, serviceSid, channelSid, sid string) (*IPMember, error) {
 	var member *IPMember
 
-	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Members/"+sid+".json")
+	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Members/"+sid)
 
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ func RemoveIPMemberFromChannel(client *TwilioIPMessagingClient, serviceSid, chan
 func ListIPMembers(client *TwilioIPMessagingClient, serviceSid, channelSid string) (*IPMemberList, error) {
 	var memberList *IPMemberList
 
-	body, err := client.get(nil, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Members.json")
+	body, err := client.get(nil, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Members")
 
 	if err != nil {
 		return memberList, err
