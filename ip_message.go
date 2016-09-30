@@ -37,7 +37,7 @@ func SendIPMessageToChannel(client *TwilioIPMessagingClient, serviceSid string, 
 		params.Set("From", from)
 	}
 
-	res, err := client.post(params, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Messages.json")
+	res, err := client.post(params, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Messages")
 
 	if err != nil {
 		return message, err
@@ -53,7 +53,7 @@ func SendIPMessageToChannel(client *TwilioIPMessagingClient, serviceSid string, 
 func GetIPChannelMessage(client *TwilioIPMessagingClient, serviceSid, channelSid, sid string) (*IPMessage, error) {
 	var message *IPMessage
 
-	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Messages/"+sid+".json")
+	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Messages/"+sid)
 
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func GetIPChannelMessage(client *TwilioIPMessagingClient, serviceSid, channelSid
 func ListIPMessages(client *TwilioIPMessagingClient, serviceSid, channelSid string) (*IPMessageList, error) {
 	var messageList *IPMessageList
 
-	body, err := client.get(nil, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Messages.json")
+	body, err := client.get(nil, "/Services/"+serviceSid+"/Channels/"+channelSid+"/Messages")
 
 	if err != nil {
 		return messageList, err
