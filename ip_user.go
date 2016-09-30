@@ -33,7 +33,7 @@ func NewIPUser(client *TwilioIPMessagingClient, serviceSid string, identity stri
 	params.Set("Identity", identity)
 	params.Set("RoleSid", roleSid)
 
-	res, err := client.post(params, "/Services/"+serviceSid+"/Users.json")
+	res, err := client.post(params, "/Services/"+serviceSid+"/Users")
 
 	if err != nil {
 		return user, err
@@ -49,7 +49,7 @@ func NewIPUser(client *TwilioIPMessagingClient, serviceSid string, identity stri
 func GetIPUser(client *TwilioIPMessagingClient, serviceSid, sid string) (*IPUser, error) {
 	var user *IPUser
 
-	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Users/"+sid+".json")
+	res, err := client.get(url.Values{}, "/Services/"+serviceSid+"/Users/"+sid)
 
 	if err != nil {
 		return nil, err
@@ -74,7 +74,7 @@ func UpdateIPUser(client *TwilioIPMessagingClient, serviceSid string, sid string
 	params.Set("Identity", identity)
 	params.Set("RoleSid", roleSid)
 
-	res, err := client.post(params, "/Services/"+serviceSid+"/Users/"+sid+".json")
+	res, err := client.post(params, "/Services/"+serviceSid+"/Users/"+sid)
 
 	if err != nil {
 		return user, err
@@ -90,7 +90,7 @@ func UpdateIPUser(client *TwilioIPMessagingClient, serviceSid string, sid string
 func ListIPUsers(client *TwilioIPMessagingClient, serviceSid string) (*IPUserList, error) {
 	var userList *IPUserList
 
-	body, err := client.get(nil, "/Services/"+serviceSid+"/Users.json")
+	body, err := client.get(nil, "/Services/"+serviceSid+"/Users")
 
 	if err != nil {
 		return userList, err
