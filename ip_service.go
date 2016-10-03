@@ -80,6 +80,7 @@ const (
 
 // Webkook post-event types
 const (
+	PostEventTypeOnMessageSend      = "onMessageSend"
 	PostEventTypeOnMessageSent      = "onMessageSent"
 	PostEventTypeOnMessageRemoved   = "onMessageRemoved"
 	PostEventTypeOnMessageUpdated   = "onMessageUpdate"
