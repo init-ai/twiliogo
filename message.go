@@ -60,6 +60,10 @@ func sendMessage(client Client, fromNumber, fromMessagingServiceSid, to string, 
 		return nil, Error{"Must have at least a Body or MediaUrl"}
 	}
 
+	if len(params.Get("Body")) > 1600 {
+		params.Set("Body", params.Get("Body")[:1600])
+	}
+
 	res, err := client.post(params, "/Messages.json")
 
 	if err != nil {
