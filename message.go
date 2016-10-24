@@ -53,15 +53,15 @@ func sendMessage(client Client, fromNumber, fromMessagingServiceSid, to string, 
 			return nil, Error{"Only allowed params are Body, MediaUrl, StatusCallback, ApplicationSid, MessagingServiceSid"}
 		}
 
+		if param == "Body" && len(value) > 1560 {
+			value = value[:1560]
+		}
+
 		params.Set(param, value)
 	}
 
 	if params.Get("Body") == "" && params.Get("MediaUrl") == "" {
 		return nil, Error{"Must have at least a Body or MediaUrl"}
-	}
-
-	if len(params.Get("Body")) > 1560 {
-		params.Set("Body", params.Get("Body")[:1560])
 	}
 
 	res, err := client.post(params, "/Messages.json")
